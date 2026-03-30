@@ -9,14 +9,14 @@ import Editmodal from "../components/Editmodal";
 const MyNote = () => {
   const { user } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const [selectedNote, setSelectedNote] = useState(null)
+  const [selectedNote, setSelectedNote] = useState(null);
 
   useEffect(() => {
     dispatch(getNotes(user.id));
   }, [user, dispatch]);
   const { loading, notes } = useSelector((state) => state.notes);
   return (
-    <div className=" min-h-screen  bg-linear-to-r from-orange-400  to-yellow-400 ">
+    <div className=" min-h-screen   ">
       <div className="flex justify-center">
         <h1 className=" flex items-center text-4xl font-[impact] ">My Notes</h1>
       </div>
@@ -41,7 +41,7 @@ const MyNote = () => {
                 <div className="flex justify-between">
                   <button
                     onClick={() => setSelectedNote(x)}
-                    className="bg-yellow-300  flex rounded-md items-center pr-2 pl-2 p-0.5 hover:scale-110 duration-200 font-medium"
+                    className="bg-yellow-300  flex rounded-md items-center  p-1 hover:scale-110 duration-200 font-medium"
                   >
                     {" "}
                     <MdOutlineModeEdit />
@@ -50,7 +50,7 @@ const MyNote = () => {
 
                   <button
                     onClick={() => dispatch(deleteNotes(x._id))}
-                    className="bg-red-600 hover:text-white flex rounded-md items-center pr-2 pl-2 p-0.5 hover:scale-110 duration-200 font-medium"
+                    className="bg-red-600 hover:text-white flex rounded-md items-center  p-1 hover:scale-110 duration-200 font-medium"
                   >
                     {" "}
                     <MdDeleteOutline />

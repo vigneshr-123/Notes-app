@@ -31,7 +31,7 @@ const AddNote = () => {
 
 
   return (
-    <div className='min-h-screen flex bg-linear-to-r from-orange-400  to-yellow-400 justify-center items-center'>
+    <div className='min-h-screen flex  justify-center items-center'>
       <form onSubmit={handleSubmit} className=' flex flex-col bg-white p-8 gap-4 w-[60%] border border-gray-500 rounded-md shadow-2xl ' action="">
         <h1 className='flex justify-center items-center gap-2 text-3xl'> <IoCreate />Create Your Note</h1>
         <input name='title' value={formdata.title} onChange={handleInput} type='text' className='py-3 border border-gray-500 rounded pl-3 outline-0' placeholder='Enter title...' />

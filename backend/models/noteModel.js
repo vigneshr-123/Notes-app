@@ -13,7 +13,24 @@ const noteSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"users",
         required:"true"
+    },
+
+    createAt: {
+        type: Date,
+        default:Date.now
+    },
+    completed: {
+        type: Boolean,
+        default:false,
+    },
+    completedAt: {
+        type: Date,
+        default:null
+    },
+    dueDate: {
+        type:Date
     }
+
 })
 
 

@@ -1,16 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { TbNotes } from "react-icons/tb";
 import { CiSearch } from "react-icons/ci";
 import { MdNoteAdd } from "react-icons/md";
-
+import NotesCalendar from "../components/NotesCalendar";
+import MyNote from "./MyNote";
+import AddNote from "./AddNote";
 
 const Userhome = () => {
-    return (
+  const [selectedPage, setSelectedPage] = useState("dashboard");
+  return (
+    <div className="flex h-screen bg-linear-to-r from-orange-400  to-yellow-400">
       <div className="  bg-linear-to-r from-orange-400  to-yellow-400 h-screen ">
-        <div className="w-64 h-screen bg-gradient-to-l from-zinc-700 via-zinc-800 to-zinc-950 text-white s p-3 ">
+        <div className=" h-screen bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-950 text-white s p-3 ">
           <h2 className="text-2xl font-light mb-7">Menu</h2>
 
           <div className="flex hover:bg-zinc-700 p-1.5 rounded-lg border justify-center gap-2.5  mb-5">
@@ -25,38 +29,47 @@ const Userhome = () => {
           </div>
 
           <nav className="flex flex-col gap-4">
-            <Link
-              to="/userhome"
+            <button
+              onClick={() => setSelectedPage("dashboard")}
               className="hover:bg-zinc-700 p-2 rounded-md flex items-center gap-2.5 text-xl font-light"
             >
               <RxDashboard />
               Dashboard
-            </Link>
+            </button>
 
-            <Link
-              to="/mynote"
+            <button
+              onClick={() => setSelectedPage("mynote")}
               className="hover:bg-zinc-700 p-2 rounded-md flex items-center gap-2.5 text-xl font-light"
             >
               <TbNotes /> My Notes
-            </Link>
+            </button>
 
-            <Link
-              to="/addnote"
+            <button
+              onClick={()=>setSelectedPage('addnote')}
               className="hover:bg-zinc-700 p-2 rounded-md flex items-center gap-2.5 text-xl font-light"
             >
               <MdNoteAdd /> Addnote
-            </Link>
+            </button>
 
-            <Link
+            <button
               to="/settings"
               className="hover:bg-zinc-700 p-2 rounded-md flex items-center gap-2.5 text-xl font-light"
             >
               <IoSettingsOutline /> Settings
-            </Link>
+            </button>
           </nav>
         </div>
       </div>
-    );
-}
 
-export default Userhome
+      {/* maibncontent */}
+      <div className="flex-1 p-6 overflow-auto">
+        {selectedPage === "dashboard" && <NotesCalendar />}
+        {selectedPage === "mynote" && <MyNote />}
+        {selectedPage === "addnote" && <AddNote />}
+        {selectedPage === "settings" && <Settings />}
+      </div>
+    </div>
+  );
+};
+
+export default Userhome;

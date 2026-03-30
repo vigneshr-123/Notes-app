@@ -12,7 +12,7 @@ export const getNotes = async (req, res) => {
 
 export const createNote = async (req, res) => {
   console.log(req.body);
-  const { title, description, owner } = req.body;
+  const { title, description, owner,dueDate } = req.body;
   if (!title || !description) {
     return res.json({ message: "all fields are required" });
   }
@@ -20,6 +20,7 @@ export const createNote = async (req, res) => {
     title,
     description,
     owner,
+    dueDate
   });
   return res.json({ message: "Note created successfully", note });
 };
@@ -54,3 +55,17 @@ export const deleteNotes = async (req, res) => {
     return res.json({ message: "invalid notes" });
   }
 };
+
+
+export const completeNote = async (req, res) => {
+  const note = await noteModel.findById(req.params.id)
+  if (!note) return res.status(404).json({ message: "note not found" })
+  
+  note.completeAt = true;
+  note.completedAt = new Date();
+  await note.save();
+  res.json(note)
+  
+
+
+}

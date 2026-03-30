@@ -35,7 +35,7 @@ const Editmodal = ({ note, onClose }) => {
         description: formdata.description,
       }),
     );
-    toast.success("Note updated succcesfully");
+    // toast.success("Note updated succcesfully");
     onClose();
   };
 

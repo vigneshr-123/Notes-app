@@ -20,11 +20,19 @@ export const deleteNotes = createAsyncThunk("notes/deleteNotes", async (id) => {
 
 export const updateNotes = createAsyncThunk(
   "notes/updateNote",
-  async ({ id, title,description }) => {
+  async ({ id, title, description }) => {
     const res = await axios.put(`http://localhost:5000/notes/${id}`, {
       title,
       description,
     });
+    return res.data;
+  },
+);
+
+export const completeNote = createAsyncThunk(
+  "notes/completeNote",
+  async (id) => {
+    const res = await axios.put(`http://localhost:5000/notes/${id}/complete`);
     return res.data;
   },
 );
@@ -41,6 +49,8 @@ const NoteSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
+      
+      // to addNote
       .addCase(addNote.pending, (state, action) => {
         state.loading = true;
       })
@@ -48,12 +58,14 @@ const NoteSlice = createSlice({
         state.loading = false;
         if (action.payload.error) {
           return alert(action.payload.error);
-        } else if (action.payload.message) {
-          toast.success(action.payload.message);
+        } else {
+          state.notes.push(action.payload)
+          toast.success("Note added");
         }
-        
       })
 
+
+      // to getnote
       .addCase(getNotes.pending, (state, action) => {
         state.loading = true;
       })
@@ -63,18 +75,23 @@ const NoteSlice = createSlice({
         console.log(state.notes);
       })
 
+
+
+      // to deleteNotes
       .addCase(deleteNotes.fulfilled, (state, action) => {
         state.loading = false;
         state.notes = state.notes.filter(
           (note) => note._id !== action.meta.arg,
         );
-        toast("Deleted succesfully")
+        toast("Deleted succesfully");
         // console.log(state.notes)
       })
       .addCase(deleteNotes.rejected, (state) => {
         toast.error("Delete failed");
       })
 
+
+      // to updateNotes
       .addCase(updateNotes.fulfilled, (state, action) => {
         const index = state.notes.findIndex(
           (note) => note._id === action.payload._id,
@@ -82,6 +99,25 @@ const NoteSlice = createSlice({
         if (index !== -1) {
           state.notes[index] = action.payload;
         }
+        toast.success("Note updated");
+      })
+      .addCase(updateNotes.rejected, () => {
+        toast.error("Update failed");
+      })
+
+
+      // calander mark completeNote
+      .addCase(completeNote.fulfilled, (state, action) => {
+        const index = state.notes.findIndex(
+          (note) => note._id === action.payload._id,
+        );
+        if (index !== -1) {
+          state.notes[index] = action.payload;
+        }
+        toast.success("Marked as complete");
+      })
+      .addCase(completeNote.rejected, () => {
+        toast.error("Failed to mark as completed");
       });
   },
 });
