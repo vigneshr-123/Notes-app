@@ -3,28 +3,35 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export const addNote = createAsyncThunk("notes/Addnote", async (formdata) => {
-  const res = await axios.post("http://localhost:5000/notes", { ...formdata });
+  const res = await axios.post("https://notes-app-4mbf.onrender.com/notes", {
+    ...formdata,
+  });
   return res.data;
 });
 
 export const getNotes = createAsyncThunk("notes/getnotes", async (userId) => {
   const res = await axios.get(
-    `http://localhost:5000/notes/getNotes?userId=${userId}`,
+    `https://notes-app-4mbf.onrender.com/notes/getNotes?userId=${userId}`,
   );
   return res.data;
 });
 export const deleteNotes = createAsyncThunk("notes/deleteNotes", async (id) => {
-  const res = await axios.delete(`http://localhost:5000/notes/${id}`);
+  const res = await axios.delete(
+    `https://notes-app-4mbf.onrender.com/notes/${id}`,
+  );
   return res.data;
 });
 
 export const updateNotes = createAsyncThunk(
   "notes/updateNote",
   async ({ id, title, description }) => {
-    const res = await axios.put(`http://localhost:5000/notes/${id}`, {
-      title,
-      description,
-    });
+    const res = await axios.put(
+      `https://notes-app-4mbf.onrender.com/notes/${id}`,
+      {
+        title,
+        description,
+      },
+    );
     return res.data;
   },
 );
@@ -32,7 +39,9 @@ export const updateNotes = createAsyncThunk(
 export const completeNote = createAsyncThunk(
   "notes/completeNote",
   async (id) => {
-    const res = await axios.put(`http://localhost:5000/notes/${id}/complete`);
+    const res = await axios.put(
+      `https://notes-app-4mbf.onrender.com/notes/${id}/complete`,
+    );
     return res.data;
   },
 );

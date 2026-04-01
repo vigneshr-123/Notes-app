@@ -18,12 +18,18 @@ const initialState = {
 // },[state.user])
 
 export const register = createAsyncThunk('users/register',async (formdata) => {
-    const res = await axios.post('http://localhost:5000/users/register',formdata)
+    const res = await axios.post(
+      "https://notes-app-4mbf.onrender.com/users/register",
+      formdata,
+    );
     return res.data
 })
 
 export const login = createAsyncThunk('users/login',async (formdata) => {
-    const res = await axios.post('http://localhost:5000/users/login',formdata)
+    const res = await axios.post(
+      "https://notes-app-4mbf.onrender.com/users/login",
+      formdata,
+    );
     return res.data
 })
 
