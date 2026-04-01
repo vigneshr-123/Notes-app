@@ -11,6 +11,9 @@ import AddNote from "./AddNote";
 
 const Userhome = () => {
   const [selectedPage, setSelectedPage] = useState("dashboard");
+
+ 
+
   return (
     <div className="flex h-screen bg-linear-to-r from-orange-400  to-yellow-400">
       <div className="  bg-linear-to-r from-orange-400  to-yellow-400 h-screen ">

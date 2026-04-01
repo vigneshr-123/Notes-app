@@ -27,7 +27,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/userhome' element={<Privateroute><Userhome /> </Privateroute>} />
         <Route path='/profile' element={<Privateroute><Profile/></Privateroute>} />
-        {/* <Route path='/addnote' element={<Privateroute><AddNote/></Privateroute>} /> */}
+        <Route path='/addnote' element={<Privateroute><AddNote/></Privateroute>} />
         {/* <Route path='/mynote' element={<Privateroute><MyNote /></Privateroute>} /> */}
         
 
